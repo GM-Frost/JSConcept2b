@@ -11,16 +11,39 @@ function App() {
     return products.price * products.quantity;
   }
 
-  function printProductInfo(products) {
-    return (
-      <>
-        <div>The Product's name is : {products.name}</div>
-        <div>The product's price : {products.price}</div>
-        <div>The product's quantity : {calculateTotalPrice(products)}</div>
-      </>
-    );
+  function printProductInfo() {
+    const allProducts = [];
+
+    products.forEach((product, index) => {
+      allProducts.push(
+        <div
+          key={index}
+          style={{
+            border: "1px solid grey",
+            marginBottom: "10px",
+            borderRadius: "8px",
+            padding: "5px",
+          }}
+        >
+          <h2>
+            The product's name:
+            <span style={{ color: "purple" }}>{product.name}</span>
+          </h2>
+          <p>The Product's Price: {product.price}</p>
+          <p>The product's quantity: {product.quantity}</p>
+          <h3>
+            The product's total price:
+            <span style={{ color: "green" }}>
+              &nbsp;${calculateTotalPrice(product)}
+            </span>
+          </h3>
+        </div>
+      );
+    });
+    return <div>{allProducts}</div>;
   }
-  return printProductInfo(products[0]);
+
+  return printProductInfo();
 }
 
 export default App;
